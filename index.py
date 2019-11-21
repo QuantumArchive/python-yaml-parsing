@@ -12,8 +12,13 @@ def flatten(fileDict):
             row = copy.deepcopy(v1)
             row['recordId'] = key
             row['end_port_name'] = k1
+
+            # Cleaning out data
             if value.get('description') != None:
                 row['description'] = value['description']
+            if row.get('ports') != None:
+                del row['ports']
+            
             flattened_data.append(row)
     return flattened_data
 
