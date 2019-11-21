@@ -17,8 +17,8 @@ def flatten(fileDict):
             if value.get('description') != None:
                 row['description'] = value['description']
             if row.get('circuits') != None:
-                del row['circuits']
-            
+                row.pop('circuits')
+
             flattened_data.append(row)
     return flattened_data
 
