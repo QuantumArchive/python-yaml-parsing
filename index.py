@@ -23,7 +23,7 @@ def flatten(fileDict):
             if record.get('description') != None:
                 row['record_description'] = record['description']
 
-                flattened_data.append(row)
+            flattened_data.append(row)
     return flattened_data
 
 def getDataFrame(collection):
