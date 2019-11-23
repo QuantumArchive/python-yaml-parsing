@@ -9,20 +9,21 @@ import copy
 
 def flatten(fileDict):
     flattened_data = []
-    for key, value in fileDict.items():
-        for k1, v1 in value['end_ports'].items():
-            if k1 != 'circuits': # remove references to bundled circuits in CID pathway
-                row = copy.deepcopy(v1)
-                row['recordId'] = key
-                row['end_port_name'] = k1
 
-                # cleaning out data
-                if value.get('description') != None:
-                    row['description'] = value['description']
-                if row.get('circuits') != None:
-                    row.pop('circuits')
+    for recordId, record in fileDict.items():
+        for end_port, end_port_record in record['end_ports'].items():
+            if end_port == 'circuits':
+                continue
 
-                flattened_data.append(row)
+            row = copy.deepcopy(end_port_record)
+            row['recordId'] = recordId
+            row['end_port_name'] = end_port
+
+            # Cleaning out data
+            if record.get('description') != None:
+                row['record_description'] = record.get('description')
+
+            flattened_data.append(row)
     return flattened_data
 
 def getDataFrame(collection):
