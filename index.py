@@ -21,7 +21,7 @@ def flatten(fileDict):
 
             # Cleaning out data
             if record.get('description') != None:
-                row['record_description'] = record['description']
+                row['record_description'] = record.get('description')
 
             flattened_data.append(row)
     return flattened_data
